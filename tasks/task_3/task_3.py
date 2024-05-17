@@ -42,7 +42,7 @@ class DocumentProcessor:
         """
         
         # Step 1: Render a file uploader widget. Replace 'None' with the Streamlit file uploader code.
-        uploaded_files = st.file_uploader(
+        uploaded_files = st.file_uploader("Please Upload the pdfs",type="pdf",  accept_multiple_files=True
             #####################################
             # Allow only type `pdf`
             # Allow multiple PDFs for ingestion
@@ -69,6 +69,15 @@ class DocumentProcessor:
                 
                 # Step 3: Then, Add the extracted pages to the 'pages' list.
                 #####################################
+                pdf_loader = PyPDFLoader(temp_file_path)
+
+                # Load the PDF fil  e
+                
+
+                # Extract pages from the loaded PDF
+                pages = pdf_loader.load()       #pdf_loader.extract_pages()
+
+                self.pages += pages
                 
                 # Clean up by deleting the temporary file.
                 os.unlink(temp_file_path)
